@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue3.js"></script>
+  <style>
+    #app {
+      width: 500px;
+      min-height: 300px;
+      margin: 0 auto;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="app">
+    <div>
+      <h2>tolist</h2>
+      <input type="text" placeholder="请输入" @keydown="giveThing">
+    </div>
+    <p>未完成事项</p>
+    <!-- 此部分用到了v-if来判断是否是已完成事件  利用v-for来循环渲染所有的事件 -->
+    <ul>
+      <li v-if="item.isck==false" v-for="(item,index) in lists" :key="index">
+        <input @click="Isdone(index)" type="checkbox" :checked='item.isck'>{{item.title}}<button
+          @click="dellist(index)">x</button>
+      </li>
+    </ul>
+    <p>已完成事项</p>
+    <ul>
+      <li v-if="item.isck==true" v-for="(item,index) in lists" :key="index">
+        <input @click="Isdone(index)" type="checkbox" :checked='item.isck'>{{item.title}}<button
+          @click="dellist(index)">x</button>
+      </li>
+    </ul>
+  </div>
+  <div>
+  </div>
+
+
+
+  <script>
+    let storage={
+  saveStorage(key,value){//存入数据  在增加  改变状态  删除时需要调用此方法  
+      // key为存储时的名字  上面代码为todo   value为获取的数据  为json格式需要进行转化
+      localStorage.setItem(key,JSON.stringify(value));
+  },
+  getStorage(key){// 获取数据 组件加载的时候需要调用此方法
+      return JSON.parse(localStorage.getItem(key));
+  },
+  clearStorage(key){//删除所有数据  没有使用
+      localStorage.clearItem(key);
+  }
+}
+export default storage;
+    // 导入缓存模块 
+    import Storage from 'Storage';
+    export default {
+      name: 'app',
+      data() {
+        return {
+          // lists为整个数据  isck为是否完成
+          lists: [{
+              title: "javascript",
+              isck: false
+            },
+            {
+              title: "java",
+              isck: false
+            },
+            {
+              title: "html",
+              isck: true
+            }
+          ]
+        }
+      },
+      mounted() {
+        this.lists = Storage.getStorage('todo')
+      },
+      methods: {
+        giveThing(e) {
+          // 写入未完成方法
+          if (e.keyCode == 13) {
+            let value = e.target.value;
+            if (value != '') {
+              this.lists.push({
+                title: value,
+                isck: false
+              });
+            }
+            e.target.value = '';
+            Storage.saveStorage('todo', this.lists);
+          }
+        },
+        Isdone(key) {
+          // 确实是否完成方法
+          let ckvalue = this.lists[key].isck;
+          this.lists[key].isck = !ckvalue;
+          Storage.saveStorage('todo', this.lists);
+
+        },
+        dellist(index) {
+          // 删除方法
+          this.lists.splice(index, 1);
+          Storage.saveStorage('todo', this.lists);
+
+        },
+      }
+    }
+  </script>
+</body>
+
+</html>

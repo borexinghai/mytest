@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList Jquery</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+<div>
+<!--    MVP设计模式，model数据层，view视图层指的是页面上的一些dom展示，presenter呈现层，业务逻辑相关的控制层，几乎都是去操作DOM,
+  v<>p<>M
+-->
+    <input id="input" type="text">
+    <button id="btn">提交</button>
+    <ul id="list">
+    </ul>
+</div>
+<script>
+    //面向DOM进行开发，在p层控制
+    function Page(){
+
+    }
+    $.extend(Page.prototype,{
+        init:function(){
+            this.bindEvents()
+        },
+        bindEvents:function(){
+            var btn=$('#btn');
+            btn.on('click',$.proxy(this.handleBtnClick,this))
+        },
+        handleBtnClick:function(){
+            var inputElem=$("#input");
+            var inputValue=inputElem.val();
+            var ulElem=$("#list");
+            ulElem.append('<li>'+inputValue+'</li>');
+            inputElem.val('');
+        }
+    })
+    var page=new Page();
+    page.init();
+</script>
+</body>
+</html>

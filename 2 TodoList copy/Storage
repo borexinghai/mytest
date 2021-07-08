@@ -1,0 +1,13 @@
+let storage={
+  saveStorage(key,value){//存入数据  在增加  改变状态  删除时需要调用此方法  
+      // key为存储时的名字  上面代码为todo   value为获取的数据  为json格式需要进行转化
+      localStorage.setItem(key,JSON.stringify(value));
+  },
+  getStorage(key){// 获取数据 组件加载的时候需要调用此方法
+      return JSON.parse(localStorage.getItem(key));
+  },
+  clearStorage(key){//删除所有数据  没有使用
+      localStorage.clearItem(key);
+  }
+}
+export default storage;

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue.js</title>
+  <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+  <script type="text/javascript" src="js/vue.js"></script>
+  <!--<script type="text/javascript" src="js/script.js"></script>-->
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+  <script>
+    //new Vue({也可以
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: 'Hello Vue.js!'
+      }
+    });
+  </script>
+</body>
+
+</html>

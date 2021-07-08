@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <article>
+<!--        文章放到了header里面，文章内容又放到了header的p元素里面-->
+        <header>
+            <h1>我是article</h1>
+            <p>创建时间：<time pubdate="pabdate">2014/09/27</time></p>
+        </header>
+        <p>
+            <b>article</b>是一个独立的区域
+        </p>
+<!--        section又把正文和评论部分进行了区分，section嵌入了评论内容，评论中每个人评论独立完整，对此使用了article元素-->
+        <section>
+            <h2>读者评论</h2>
+            <article>
+                <header>
+                    <h3>读者：猪猪</h3>
+                    <p>
+                        <time pubdate datetime="2014/09/27T21:00">两小时前</time>
+                    </p>
+                </header>
+                <p>
+                    文章很好！
+                </p>
+            </article>
+            <article>
+                <header>
+                    <h3>读者：qiqi</h3>
+                    <p>
+                        <time pubdate datetime="2014/09/27T21:00">两小时前</time>
+                    </p>
+                </header>
+                <p>
+                    文章很good！
+                </p>
+            </article>
+        </section>
+        <footer>
+            <p><small>版权</small></p>
+        </footer>
+    </article>
+</body>
+</html>

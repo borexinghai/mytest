@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的列表渲染</title>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--不建议index作为key值，费性能，view没办法充分复用DOM节点-->
+        <!--        模板占位符template-->
+        <div v-for="(item,key,index) in userInfo">
+            {{item}}----{{key}}-----{{index}}
+        </div>
+    </div>
+    <script>
+        //使用变异方法pop,push,shift,unshift,splice截取,sort,reverse
+        //改变引用，数组在JavaScript里是引用类型
+        //通过列表项把对象也进行列表渲染,改引用，对象发生变化，渲染也变化
+        var dataList = {
+            userInfo:{
+                name:"Dell",
+                age:26
+            }
+        };
+        //new Vue({也可以
+        var vm=new Vue({
+            el: '#app',
+            data: dataList
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue.js</title>
+        <script src="js/vue.js"></script>
+        <style>
+            .v-enter, .v-leave-to{
+                opacity: 0;
+            }
+            .v-enter-active, .v-leave-active{
+                transition:opacity 1s;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+            <transition>
+                <div v-show="show">hello world</div>
+            </transition>
+            <button @click="handleBtnClick">toggle</button>
+        </div>
+        <script>
+            var vm=new Vue({
+                el: '#root',
+                data: {
+                    show:false
+                },
+                methods:{
+                    handleBtnClick:function(){
+                            this.show=!this.show
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

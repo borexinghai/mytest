@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>父子组件传值</title>
+        <script type="text/javascript" src="js/vue.js"></script>
+    </head>
+    <body>
+<!--    ref获取DOM节点-->
+        <div id="root">
+<!--            父组件通过属性的形式向子组件传递数据-->
+<!--            加了冒号是数字，双引号里的内容是JS表达式，就不是字符串了-->
+<!--            父组件监听inc-->
+            <counter :count="2" @inc="handleIncrease"></counter>
+            <counter :count="3" @inc="handleIncrease"></counter>
+<!--           子组件通过事件触发的形式向父组件传值-->
+<!--            父子组件传值，单向数据流规定，父组件可以向子组件传递任何数据，但是子组件不能修改父组件传过来的数据-->
+            <div>{{total}}</div>
+        </div>
+        <script>
+            var counter={
+                props:['count'],
+                data:function(){
+                    return{
+                        number:this.count
+                    }
+                },
+                template:'<div @click="handleClick">{{number}}</div>',
+                methods:{
+                    handleClick:function(){
+                        this.number++;
+                        //子组件每点击一次，根组件会触发inc事件
+                        this.$emit('inc',1)
+                    }
+                }
+            };
+            var vm=new Vue({
+                el: '#root',
+                data:{
+                    total:5
+                },
+                components:{
+                    counter:counter
+                },
+                methods:{
+                    handleIncrease:function(step){
+                        this.total+=step
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

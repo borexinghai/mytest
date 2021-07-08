@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" value="sss" id="input">
+  <span>显示的内容:</span>
+  <span id="content">***</span>
+</body>
+<script>
+  var input = document.getElementById("input");
+  var text = document.getElementById("content");
+
+  document.addEventListener("keyup", (e) => {
+    console.log(e)
+    if (e.code === "Enter") {
+      text.innerText = e.target.value;
+    }
+  })
+
+</script>
+</html>
