@@ -10,7 +10,7 @@
 <body>
   <div id="root">
     <input v-model="inputValue" />
-    <button @click="handleClick">提交</button>
+    <button v-on:click="handleClick">提交</button>
     <ul>
       <li v-for="(item ,index) of list" :key="index">{{item}}</li>
     </ul>
