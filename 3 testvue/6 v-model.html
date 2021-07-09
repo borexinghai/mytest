@@ -11,15 +11,15 @@
 
 <body>
   <div id="app">
-    <p>{{ message }}</p>
-    <input v-model="message">
+    <p>{{ value }}</p>
+    <input v-model="value">
   </div>
   <script>
     //new Vue({也可以
     var app = new Vue({
       el: "#app",
       data: {
-        message: 'Hello Vue.js!'
+        value: 'Hello Vue.js!'
       }
     });
   </script>

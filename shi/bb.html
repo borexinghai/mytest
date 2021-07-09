@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist实战</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+   <!-- 引入Bootstrap核心样式文件 -->
+   <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+        .isFinish{
+            color: red!important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container text-center">
+       <div class="row">
+           <div class="col-md-7">
+               <div class="form-group">
+                   <label>添加工作事项</label>
+                   <input type="text" class="form-control" v-model="newItem" @keyup.enter="addItem">
+               </div>
+               <div class="list-group text-left form-group">
+                   <a href="#" class="list-group-item text-left">
+                       工作清单：
+                   </a>
+                   <a href="#" class="list-group-item" v-for="(item,index) in Items">
+                        <span>{{index+1}}</span>
+                        <span>{{item.title}}</span>
+                        <span class="badge" @click="removeItem(index)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </span>
+                        <span class="badge" :class="{isFinish:item.isFinish}" @click="toogleItem(item)">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                   </a>
+               </div>
+             
+           </div>
+       </div>
+      
+    </div>
+    <script>
+        // 本地存储数据
+        let Isc=(function(){
+            return{
+                add(value){
+                    localStorage.setItem('todoList',JSON.stringify(value))
+ 
+                },
+                get(){
+                    return JSON.parse(localStorage.getItem('todoList'))
+                },
+                remove(){
+                    localStorage.red('todoList')
+                }
+            }
+        })()
+       let vm =new Vue({
+           el:'#app',
+           data:{
+                newItem:'',
+                Items:Isc.get()||[],
+           },
+           methods: {
+               // 添加工作清单
+               addItem(){
+                   var item={
+                       id:this.Items.length+1,
+                       title:this.newItem,
+                       isFinish:false,
+                   }
+                   this.Items.push(item),
+                   Isc.add(this.Items)
+                   this.newItem='' // 清空input框   
+               },
+               // 完成
+               toogleItem(item){
+                   item.isFinish=!item.isFinish;
+                   Isc.add(this.Items)
+                },
+                // 移除
+                removeItem(index){
+                    this.Items.splice(index,1)
+                    Isc.add(this.Items)
+ 
+                }
+           },
+       })
+    </script>
+</body>
+</html>

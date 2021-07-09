@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="aa.css">
+  <script src="vue3.js"></script>
 </head>
+
 <body>
-  <div></div>
+  <div class="top">
+    <div class="top-center">
+      <h3>任务计划表:</h3>
+    </div>
+  </div>
+
+  <div class="content" id="">
+    <h3>添加任务:</h3>
+    <input placeholder="提示：+回车即可添加任务" type="text" value="" id="inp"
+    v-on:keyup.enter="enterFn">
+
+    <h3>未完成任务列表:</h3>
+    <ul class="list list-begin">
+      <li class="todo">
+        <div>
+          <input class="toggle" type="checkbox" />
+          <label>任务一</label>
+          <button class="destroy">x</button>
+        </div>
+      </li>
+    </ul>
+    <h3>已完成任务列表:</h3>
+    <ul class="list list-end">
+      <li class="done">
+        <div>
+          <input class="toggle" type="checkbox" checked="checked"/>
+          <label>任务一</label>
+          <button class="destroy">x</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script src="aa.js"></script>
 </body>
+
 </html>
